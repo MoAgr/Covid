@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Covid Nepal</title>
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/Nepal(1).png">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="static/styles.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><img src="assets/img/Coronavirus.png"><a class="navbar-brand" href="#">Covid Nepal</a>
+        <div class="container"><img src="static/Coronavirus.png"><a class="navbar-brand" href="#">Covid Nepal</a>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"></li>
@@ -32,19 +32,19 @@
             <div class="row">
                 <div class="col-md-4" id="total-block-main">
                     <div id="total-block" class="boxes">
-                        <h1 class="box-content">Data</h1>
+                        <h1 class="box-content">{{ total }}</h1>
                         <h1 class="box-title">Total</h1>
                     </div>
                 </div>
                 <div class="col-md-4" id="active-block-main">
                     <div id="active-block" class="boxes">
-                        <h1 class="box-content">Data</h1>
+                        <h1 class="box-content">{{ active }}</h1>
                         <h1 class="box-title">Active</h1>
                     </div>
                 </div>
                 <div class="col-md-4" id="recovered-block-main">
                     <div id="recovered-block" class="boxes">
-                        <h1 class="box-content">Data</h1>
+                        <h1 class="box-content">{{ recovered }}</h1>
                         <h1 class="box-title">Recovered</h1>
                     </div>
                 </div>
@@ -55,8 +55,8 @@
         <h1>Useful Links:</h1>
         <p>Paragraph</p>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
