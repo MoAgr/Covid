@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Covid Nepal</title>
     <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
-    <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
     <link rel="stylesheet" href="static/bootstrap.min.css">
     <link rel="stylesheet" href="static/styles.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
@@ -17,9 +13,11 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><img src="static/Coronavirus.png"><a class="navbar-brand" href="https://covidnepal.tech/">Covid Nepal</a>
+        <div><img src="static/Coronavirus.png"><a class="navbar-brand" href="https://covidnepal.tech/">Covid Nepal</a>
         </div>
     </nav>
+
+
     <div id="data-block">
         <div class="container" id="case-container" style="max-width: 100%;">
             <div class="row">
@@ -65,7 +63,7 @@
                     <div id="freebies-block-1" class="boxes-bottom">
                         <h1 class="bottom-box-title">Free Resources</h1>
                         <ul class="list-group">
-                            <li class="list-group-item"><span><a href="https://bit.ly/coursera-covid"></a>Free Courses on Coursera.org</span></li>
+                            <li class="list-group-item"><span><a href="https://bit.ly/coursera-covid">Free Courses on Coursera.org</a></span></li>
                             <li class="list-group-item"><span><a href="https://bit.ly/khan-academy-covid">Free Courses on Khan Academy</a></span></li>
                             <li class="list-group-item"><span><a href="https://bit.ly/covidnepal19">Free SkillShare subscription for students</a></span></li>
                             <li class="list-group-item"><span><a href="https://bit.ly/free-books-covid">Free Stories on Audible</a></span></li>
@@ -77,11 +75,15 @@
                     <div id="freebies-block" class="boxes-bottom">
                         <h1 class="bottom-box-title">News</h1>
                         <ul class="list-group">
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 2</span></li>
-                            <li class="list-group-item"><span>List Group Item 3</span></li>
-                            <li class="list-group-item"><span>List Group Item 4</span></li>
-                            <li class="list-group-item"><span>List Group Item 5</span></li>
+{#                            <li class="list-group-item"><span><a href="{{ nlink }}">{{ headline }} ({{ source }})</a></span></li>#}
+{#                            <li class="list-group-item"><span>List Group Item 2</span></li>#}
+{#                            <li class="list-group-item"><span>List Group Item 3</span></li>#}
+{#                            <li class="list-group-item"><span>List Group Item 4</span></li>#}
+{#                            <li class="list-group-item"><span>List Group Item 5</span></li>#}
+
+                            {%  for title, source, link in news_list %}
+                                <li class="list-group-item"><span><a href="{{ link }}">{{ title }} ({{ source }})</a></span></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -110,8 +112,8 @@
             <p class="copyright">#StaySafe</p>
         </footer>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+{#    <script src="static/jquery.min.js"></script>#}
+{#    <script src="static/bootstrap.min.js"></script>#}
 </body>
 
 </html>
