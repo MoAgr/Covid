@@ -12,8 +12,20 @@ news = requests.get(
     'https://newsapi.org/v2/top-headlines?q=corona&apiKey=71026374f7a64e73896dfc7ef9c35d03&pageSize=50&page=2&language=en&from=' + str(
         date.today() - timedelta(2)) + '&sortBy=popularityAt')
 news_json_obj = news.json()
+nepali_news=requests.get('https://nepalcorona.info/api/v1/news')
+nepali_news_json=nepali_news.json()
 
-for i in range(0, 5):
+for i in range(0, 3):
+    title = str(nepali_news_json['data'][i]['title'])
+    source = str(nepali_news_json['data'][i]['source'])
+    nlink = str(nepali_news_json['data'][i]['url'])
+    t = t + (title,)
+    t = t + (source,)
+    t = t + (nlink,)
+    news_list.append(t)
+    t = tuple()
+
+for i in range(0, 2):
     title = str(news_json_obj['articles'][i]['title'])
     source = str(news_json_obj['articles'][i]['source']['name'])
     nlink = str(news_json_obj['articles'][i]['url'])
@@ -30,7 +42,7 @@ def cases():
     confirmed_cases = int(json_object[-1]['Confirmed'])
     deaths = int(json_object[-1]['Deaths'])
     recovered = int(json_object[-1]['Recovered'])
-    active = int(json_object[-1]['Active'])
+    active =int(json_object[-1]['Active'])
     todays_date = date.today()
     days_to_go = str(lockdown_end_date - todays_date).split(',')[0]
     time = str(datetime.now())
