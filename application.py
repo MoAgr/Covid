@@ -7,7 +7,7 @@ from pytz import timezone
 application = app = Flask(__name__)
 lockdown_end_date = date(2020, 4, 28)
 date_to_show = lockdown_end_date.strftime("%b %d")
-nepal=timezone('Asia/Kathmandu')
+UTC=timezone('UTC')
 
 @app.after_request
 def set_response_headers(response):
@@ -57,7 +57,7 @@ def cases():
     todays_date = date.today()
     days_to_go = str(lockdown_end_date - todays_date).split(',')[0]
     update_time=str(json_object['latest_stat_by_country'][0]['record_date']).split()[1]
-    current_time = str(datetime.now(nepal)).split()[1]
+    current_time = str(datetime.now(UTC)).split()[1]
     update_time_hrs=int(update_time.split(':')[0])
     current_time_hrs=int(current_time.split(':')[0])
     if(update_time_hrs==current_time_hrs):
