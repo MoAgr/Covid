@@ -48,17 +48,24 @@ def cases():
         news_list.append(t)
         t = tuple()
 
-    response = requests.get('https://api.covid19api.com/live/country/nepal/status/confirmed')
+    response = requests.get('http://brp.com.np/covid/nepal.php')
     json_object = response.json()
-    confirmed_cases = int(json_object[-1]['Confirmed'])
-    deaths = int(json_object[-1]['Deaths'])
-    recovered = int(json_object[-1]['Recovered'])
-    active =int(json_object[-1]['Active'])
+    confirmed_cases = int(json_object['latest_stat_by_country'][0]['total_cases'])
+    # deaths = int(json_object['latest_stat_by_country'][0]['total_deaths'])
+    recovered = int(json_object['latest_stat_by_country'][0]['total_recovered'])
+    active =int(json_object['latest_stat_by_country'][0]['active_cases'])
     todays_date = date.today()
     days_to_go = str(lockdown_end_date - todays_date).split(',')[0]
-    time = str(datetime.now(nepal))
-    time = time.split()[1].split(':')[0]
-
+    update_time=str(json_object['latest_stat_by_country'][0]['record_date']).split()[1]
+    current_time = str(datetime.now(nepal)).split()[1]
+    update_time_hrs=int(update_time.split(':')[0])
+    current_time_hrs=int(current_time.split(':')[0])
+    if(update_time_hrs==current_time_hrs):
+        update_time_min=int(update_time.split(':')[1])
+        current_time_min = int(current_time.split(':')[1])
+        time=current_time_min-update_time_min
+    else:
+        time=current_time_hrs-update_time_hrs
 
     return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered, time=time,
                            lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
