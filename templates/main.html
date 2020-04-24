@@ -9,11 +9,19 @@
     <link rel="stylesheet" href="static/bootstrap.min.css">
     <link rel="stylesheet" href="static/styles.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+
+    <!-- META TAGS -->
+    <meta name="description" content="A counter to the current COVID-19 scenario in Nepal" />
+
+    <meta property="og:title" content="COVID Nepal- Updated COVID scenario of Nepal">
+    <meta property="og:description" content="A counter to the current COVID-19 scenario in Nepal plus other useful resources">
+    <meta property="og:image" content="static/coronavirus512.png">
+    <meta property="og:url" content="https://www.covidnepal.tech/">
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div><img src="static/Coronavirus.png"><a class="navbar-brand" href="https://covidnepal.tech/">Covid Nepal</a>
+        <div><img src="static/Coronavirus.png"><a class="navbar-brand" href="https://covidnepal.tech/">Covid Nepal (BETA)</a>
         </div>
     </nav>
 
@@ -43,6 +51,10 @@
             <p id="last-updated">*LAST UPDATED:{{time}} hours ago</p>
         </div>
     </div>
+    <div id="lockdown-info-1">
+        <h1>Lockdown Information:</h1>
+        <p>Lockdown ends on: {{lockdown_end_date}} ({{days_to_go}} to go)</p>
+    </div>
     <div id="useful-link-title-box"></div>
     <div id="data-block-1">
         <div class="container" id="useful-links-container" style="max-width: 100%;">
@@ -55,7 +67,7 @@
                             <li class="list-group-item"><span><a href="https://bit.ly/whocovidnepal">WHO's COVID Portal</a></span></li>
                             <li class="list-group-item"><span><a href="https://bit.ly/covidviber">MoHP's Viber Group</a></span></li>
                             <li class="list-group-item"><span><a href="https://bit.ly/hamroswastha">Hamro Swastha App</a></span></li>
-                            <li class="list-group-item"><span><a href="">List Group Item 5</a></span></li>
+                            <li class="list-group-item"><span><a href="https://bit.ly/coronapreventionCDC">Coronavirus Prevention Methods</a></span></li>
                         </ul>
                     </div>
                 </div>
@@ -84,10 +96,7 @@
             </div>
         </div>
     </div>
-    <div id="lockdown-info">
-        <h1>Lockdown Information:</h1>
-        <p>Lockdown ends on:{{lockdown_end_date}}({{days_to_go}} to go)</p>
-    </div>
+
     <div class="container">
         <div id="social-share">
             <h1>Spread credible news, not virus!</h1><div><iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fcovidnepal.tech%2F&layout=button&size=large&width=77&height=28&appId" width="77" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
@@ -97,17 +106,16 @@
     <div class="footer-basic">
         <footer>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Contact</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                <li class="list-inline-item"><a href="{{ url_for('cases') }}">Home</a></li>
+                <li class="list-inline-item"><a href="{{ url_for('contact') }}">Contact</a></li>
+{#                <li class="list-inline-item"><a href="#">About</a></li>#}
+{#                <li class="list-inline-item"><a href="#">Terms</a></li>#}
+{#                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>#}
             </ul>
             <p class="copyright">#StaySafe</p>
         </footer>
     </div>
-{#    <script src="static/jquery.min.js"></script>#}
-{#    <script src="static/bootstrap.min.js"></script>#}
+
 </body>
 
 </html>

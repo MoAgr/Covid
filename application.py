@@ -35,7 +35,15 @@ for i in range(0, 2):
     news_list.append(t)
     t = tuple()
 
-@app.route('/', methods=['GET', 'POST'])
+@app.after_request
+def set_response_headers(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
+
+
+@app.route('/')
 def cases():
     response = requests.get('https://api.covid19api.com/live/country/nepal/status/confirmed')
     json_object = response.json()
@@ -52,6 +60,9 @@ def cases():
     return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered, time=time,
                            lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
 
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
