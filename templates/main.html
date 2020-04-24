@@ -75,14 +75,8 @@
                     <div id="freebies-block" class="boxes-bottom">
                         <h1 class="bottom-box-title">News</h1>
                         <ul class="list-group">
-{#                            <li class="list-group-item"><span><a href="{{ nlink }}">{{ headline }} ({{ source }})</a></span></li>#}
-{#                            <li class="list-group-item"><span>List Group Item 2</span></li>#}
-{#                            <li class="list-group-item"><span>List Group Item 3</span></li>#}
-{#                            <li class="list-group-item"><span>List Group Item 4</span></li>#}
-{#                            <li class="list-group-item"><span>List Group Item 5</span></li>#}
-
                             {%  for title, source, link in news_list %}
-                                <li class="list-group-item"><span><a href="{{ link }}">{{ title }} ({{ source }})</a></span></li>
+                                <li class="list-group-item"><span><a href="{{ link }}">{{ title }}(Source: {{ source }})</a> </span></li>
                             {% endfor %}
                         </ul>
                     </div>
