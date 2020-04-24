@@ -2,26 +2,45 @@
 <html>
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148214233-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-148214233-3');
+    </script>
+
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Covid Nepal</title>
+
+    <!--NO CACHING -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+
+
     <link rel="icon" type="image/png" sizes="512x512" href="static/Nepal(1).png">
     <link rel="stylesheet" href="static/bootstrap.min.css">
     <link rel="stylesheet" href="static/styles.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
 
     <!-- META TAGS -->
-    <meta name="description" content="A counter to the current COVID-19 scenario in Nepal" />
+    <meta name="description" content="Current COVID status of Nepal. Useful resources like: Lockdown Info, Freebies, Latest NEWS from around the globe." />
 
-    <meta property="og:title" content="COVID Nepal- Updated COVID scenario of Nepal">
-    <meta property="og:description" content="A counter to the current COVID-19 scenario in Nepal plus other useful resources">
+    <meta property="og:title" content="COVID Nepal">
+    <meta property="og:description" content="Current COVID status of Nepal. Useful resources like: Lockdown Info, Freebies, Latest NEWS from around the globe.">
     <meta property="og:image" content="/static/thumbnail.png">
     <meta property="og:url" content="https://www.covidnepal.tech/">
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div><a class="navbar-brand" href="https://covidnepal.tech/"><img src="static/Coronavirus.png">&nbsp;&nbsp;&nbsp;&nbsp;Covid Nepal (BETA)</a>
+        <div><a class="navbar-brand" href="https://covidnepal.tech/"><img src="static/Coronavirus.png">&nbsp;&nbsp;Covid Nepal</a>
         </div>
     </nav>
 
@@ -48,12 +67,12 @@
                     </div>
                 </div>
             </div>
-            <p id="last-updated">*LAST UPDATED:{{time}} ago</p>
+            <p id="last-updated">*LAST UPDATED:{{time}} hours ago</p>
         </div>
     </div>
     <div id="lockdown-info-1">
         <h1>Lockdown Information:</h1>
-        <p>Lockdown ends on: {{lockdown_end_date}} ({{days_to_go}} to go)</p>
+        <p>Lockdown ends after {{lockdown_end_date}} ({{days_to_go}} to go)</p>
     </div>
     <div id="useful-link-title-box"></div>
     <div id="data-block-1">
@@ -63,11 +82,11 @@
                     <div id="unknown-block" class="boxes-bottom">
                         <h1 class="bottom-box-title">Useful Links</h1>
                         <ul class="list-group">
-                            <li class="list-group-item"><span><a href="https://bit.ly/mohpcovid">MoHP's COVID Portal</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/whocovidnepal">WHO's COVID Portal</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/covidviber">MoHP's Viber Group</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/hamroswastha">Hamro Swastha App</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/coronapreventionCDC">Coronavirus Prevention Methods</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/mohpcovid">MoHP's COVID Portal</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/whocovidnepal">WHO's COVID Portal</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/covidviber">MoHP's Viber Group</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/hamroswastha">Hamro Swastha App</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/coronapreventionCDC">Coronavirus Prevention Methods</a></span></li>
                         </ul>
                     </div>
                 </div>
@@ -75,11 +94,11 @@
                     <div id="freebies-block-1" class="boxes-bottom">
                         <h1 class="bottom-box-title">Free Resources</h1>
                         <ul class="list-group">
-                            <li class="list-group-item"><span><a href="https://bit.ly/coursera-covid">Free Courses on Coursera.org</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/khan-academy-covid">Free Courses on Khan Academy</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/covidnepal19">Free SkillShare subscription for students</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/free-books-covid">Free Stories on Audible</a></span></li>
-                            <li class="list-group-item"><span><a href="https://bit.ly/eBooks-redshelf">Free eBooks for Students</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/coursera-covid">Free Courses on Coursera.org</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/khan-academy-covid">Free Courses on Khan Academy</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/covidnepal19">Free SkillShare subscription for students</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/free-books-covid">Free Stories on Audible</a></span></li>
+                            <li class="list-group-item"><span><a target="_blank" href="https://bit.ly/eBooks-redshelf">Free eBooks for Students</a></span></li>
                         </ul>
                     </div>
                 </div>
