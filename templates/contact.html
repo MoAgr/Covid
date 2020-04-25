@@ -29,16 +29,16 @@
 
 
     <div id="body-main-contact">
-        <h1 class = "contact-heading">About App:</h1>
-        <p class = "contact-paragraph">Through this webapp, we aim to provide correct and updated stats of the current coronavirus situation of Nepal. We plan to add more features very soon which will help visualise this data visually.
-        <br>We have also added some very useful links along with a few hand-picked resources, which we believe will be very useful for people who are locked in their homes and have a lot of time to be more productive.
+        <h1 class = "contact-heading" id = "about">About App:</h1>
+        <p class = "contact-paragraph">Through this webapp, we aim to provide correct and updated stats of the current coronavirus situation of Nepal. We plan to add more features very soon which will help visualise this data.
+        <br>We have also added some useful links along with a few hand-picked resources, which we believe will be very useful for students as well as others stuck at home.
         </p>
 
         <h1 class = "contact-heading">About the Developers:</h1>
         <p class = "contact-paragraph">We are two freshmen studying Bachelor in Computer Engineering from IOE, Pulchowk Campus.
-            In an attempt to apply what we learned, we have developed this website from scratch. </p>
+            In an attempt to apply what we have learnt, we developed this app from scratch. </p>
 
-     <h1 class = "contact-heading">Contact:</h1>
+     <h1 class = "contact-heading" id = "contact">Contact:</h1>
         <p class = "contact-paragraph">We'd love to hear from you! Please mail us your queries/ suggestions at: <a href="mailto:info@covidnepal.tech" class="footer-links">info@covidnepal.tech</a></p>
 <br>
     </div>
@@ -46,8 +46,8 @@
         <footer>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="{{ url_for('cases') }}">Home</a></li>
-                <li class="list-inline-item"><a href="{{ url_for('contact') }}">Contact</a></li>
-{#                <li class="list-inline-item"><a href="#">About</a></li>#}
+                <li class="list-inline-item"><a href="{{ url_for('contact') }}#contact">Contact</a></li>
+                <li class="list-inline-item"><a href="{{ url_for('contact') }}#about">About</a></li>
 {#                <li class="list-inline-item"><a href="#">Terms</a></li>#}
 {#                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>#}
             </ul>
