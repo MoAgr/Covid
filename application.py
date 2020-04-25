@@ -5,7 +5,7 @@ from datetime import date, timedelta
 from pytz import timezone
 
 application = app = Flask(__name__)
-lockdown_end_date = date(2020, 4, 28)
+lockdown_end_date = date(2020, 4, 27)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
 
@@ -55,7 +55,7 @@ def cases():
     recovered = int(json_object['latest_stat_by_country'][0]['total_recovered'])
     active =int(json_object['latest_stat_by_country'][0]['active_cases'])
     todays_date = date.today()
-    days_to_go = str(lockdown_end_date - todays_date).split(',')[0]
+    days_to_go = str((lockdown_end_date+timedelta(1)) - todays_date).split(',')[0]
     update_time=str(json_object['latest_stat_by_country'][0]['record_date']).split()[1]
     current_time = str(datetime.now(UTC)).split()[1]
     update_time_hrs=int(update_time.split(':')[0])
