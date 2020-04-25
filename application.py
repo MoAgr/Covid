@@ -63,9 +63,15 @@ def cases():
     if(update_time_hrs==current_time_hrs):
         update_time_min=int(update_time.split(':')[1])
         current_time_min = int(current_time.split(':')[1])
-        time=str(current_time_min-update_time_min)+' minutes'
+        if(current_time_min-update_time_hrs==1):
+            time=str(current_time_min-update_time_min)+' minute'
+        else:
+            time = str(current_time_min - update_time_min) + ' minutes'
     else:
-        time=str(current_time_hrs-update_time_hrs)+' hours'
+        if(current_time_hrs-update_time_hrs==1):
+            time=str(current_time_hrs-update_time_hrs)+' hour'
+        else:
+            time = str(current_time_hrs - update_time_hrs) + ' hours'
 
     return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered, time=time,
                            lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
