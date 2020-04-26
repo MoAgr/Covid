@@ -5,7 +5,7 @@ from datetime import date, timedelta
 from pytz import timezone
 
 application = app = Flask(__name__)
-lockdown_end_date = date(2020, 4, 27)
+lockdown_end_date = date(2020, 5, 7)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
 
