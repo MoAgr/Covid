@@ -29,9 +29,9 @@ def cases():
     nepali_news_json = nepali_news.json()
 
     for i in range(0, 3):
-        title = str(nepali_news_json['data'][i]['title'])
-        source = str(nepali_news_json['data'][i]['source'])
-        nlink = str(nepali_news_json['data'][i]['url'])
+        title = (nepali_news_json['data'][i]['title'])
+        source = (nepali_news_json['data'][i]['source'])
+        nlink = (nepali_news_json['data'][i]['url'])
         t = t + (title,)
         t = t + (source,)
         t = t + (nlink,)
@@ -39,9 +39,9 @@ def cases():
         t = tuple()
 
     for i in range(0, 2):
-        title = str(news_json_obj['articles'][i]['title'])
-        source = str(news_json_obj['articles'][i]['source']['name'])
-        nlink = str(news_json_obj['articles'][i]['url'])
+        title = (news_json_obj['articles'][i]['title'])
+        source = (news_json_obj['articles'][i]['source']['name'])
+        nlink = (news_json_obj['articles'][i]['url'])
         t = t + (title,)
         t = t + (source,)
         t = t + (nlink,)
