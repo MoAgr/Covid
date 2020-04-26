@@ -79,3 +79,9 @@ def cases():
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
+@app.route('/OneSignalSDKUpdateWorker.js')
+def noti():
+    return render_template("sdkupdate.html")
+@app.route('/OneSignalSDKWorker.js')
+def notif():
+    return render_template('sdk.html')
