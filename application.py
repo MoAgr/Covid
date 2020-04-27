@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
-import requests
-from datetime import datetime
-from datetime import date, timedelta
+import requests,datetime
+from datetime import date,timedelta
+from datetime import datetime as dttime
+import pytz
 from pytz import timezone
 
 application = app = Flask(__name__)
@@ -56,22 +57,26 @@ def cases():
     active =int(json_object['latest_stat_by_country'][0]['active_cases'])
     todays_date = date.today()
     days_to_go = str((lockdown_end_date+timedelta(1)) - todays_date).split(',')[0]
-    update_time=str(json_object['latest_stat_by_country'][0]['record_date']).split()[1]
-    current_time = str(datetime.now(UTC)).split()[1]
-    update_time_hrs=int(update_time.split(':')[0])
-    current_time_hrs=int(current_time.split(':')[0])
-    if(update_time_hrs==current_time_hrs):
-        update_time_min=int(update_time.split(':')[1])
-        current_time_min = int(current_time.split(':')[1])
-        if(current_time_min-update_time_hrs==1):
-            time=str(current_time_min-update_time_min)+' minute'
+    update_time=str(json_object['latest_stat_by_country'][0]['record_date'])
+    update_time=dttime.strptime(update_time,'%Y-%m-%d %H:%M:%S.%f')
+    update_time = update_time.replace(tzinfo=pytz.UTC)
+    current_time =(dttime.now(UTC))
+    tdelta=current_time-update_time
+    if(tdelta.days==0):
+        time1_hour=str(tdelta).split(':')[0]
+        if(int(time1_hour)==0):
+            time1_minute=str(tdelta).split(':')[1]
+            if(int(time1_minute)==1):
+                time=time1_minute+ ' minute'
+            else:
+                time=time1_minute+' minutes'
+        elif(int(time1_hour)==1):
+            time=time1_hour+ ' hour'
         else:
-            time = str(current_time_min - update_time_min) + ' minutes'
+            time=time1_hour+' hours'
     else:
-        if(current_time_hrs-update_time_hrs==1):
-            time=str(current_time_hrs-update_time_hrs)+' hour'
-        else:
-            time = str(current_time_hrs - update_time_hrs) + ' hours'
+        time1_day=str(tdelta).split(',')[0]
+        time=time1_day
 
     return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered, time=time,
                            lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
@@ -79,9 +84,4 @@ def cases():
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
-@app.route('/OneSignalSDKUpdateWorker.js')
-def noti():
-    return render_template("sdkupdate.html")
-@app.route('/OneSignalSDKWorker.js')
-def notif():
-    return render_template('sdk.html')
+
