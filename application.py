@@ -9,6 +9,7 @@ application = app = Flask(__name__)
 lockdown_end_date = date(2020, 5, 7)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
+ktm=timezone('Asia/Kathmandu')
 
 @app.after_request
 def set_response_headers(response):
@@ -49,18 +50,21 @@ def cases():
         news_list.append(t)
         t = tuple()
 
-    response = requests.get('http://brp.com.np/covid/nepal.php')
+    response = requests.get('https://nepalcorona.info/api/v1/data/nepal')
     json_object = response.json()
-    confirmed_cases = int(json_object['latest_stat_by_country'][0]['total_cases'])
+    response1=requests.get('https://data.nepalcorona.info/api/v1/covid')
+    json_object_1=response1.json()
+    confirmed_cases = int(json_object['tested_positive'])
     # deaths = int(json_object['latest_stat_by_country'][0]['total_deaths'])
-    recovered = int(json_object['latest_stat_by_country'][0]['total_recovered'])
-    active =int(json_object['latest_stat_by_country'][0]['active_cases'])
+    recovered = int(json_object['recovered'])
+    active =confirmed_cases-recovered
     todays_date = date.today()
     days_to_go = str((lockdown_end_date+timedelta(1)) - todays_date).split(',')[0]
-    update_time=str(json_object['latest_stat_by_country'][0]['record_date'])
-    update_time=dttime.strptime(update_time,'%Y-%m-%d %H:%M:%S.%f')
-    update_time = update_time.replace(tzinfo=pytz.UTC)
-    current_time =(dttime.now(UTC))
+    update_time=str(json_object_1[-2]['createdOn']).split('+')[0]
+    update_time=dttime.strptime(update_time,'%Y-%m-%dT%H:%M:%S.%f')
+    # update_time = update_time.replace(tzinfo=pytz.timezone('Asia/Kathmandu'))
+    update_time=pytz.timezone('Asia/Kathmandu').localize(update_time)
+    current_time =(dttime.now(ktm))
     tdelta=current_time-update_time
     if(tdelta.days==0):
         time1_hour=str(tdelta).split(':')[0]
@@ -85,3 +89,5 @@ def cases():
 def contact():
     return render_template("contact.html")
 
+if __name__=='__main__':
+    app.run(debug=True)
