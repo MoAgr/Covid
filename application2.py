@@ -4,21 +4,22 @@ from datetime import date,timedelta
 from datetime import datetime as dttime
 import pytz
 from pytz import timezone
-from flask_apscheduler import APScheduler
 
-scheduler = APScheduler()
 application = app = Flask(__name__)
 lockdown_end_date = date(2020, 5, 7)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
-ktm=timezone('Asia/Kathmandu')
+
+@app.after_request
+def set_response_headers(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 
-confirmed_cases = active = recovered = time = days_to_go = news_list = None
-update_counter = 100
-def retrieve():
-    global confirmed_cases, active, recovered, time, days_to_go, news_list, update_counter
-    update_counter += 1
+@app.route('/')
+def cases():
     news_list = []
     t = tuple()
     news = requests.get(
@@ -48,21 +49,18 @@ def retrieve():
         news_list.append(t)
         t = tuple()
 
-    response = requests.get('https://nepalcorona.info/api/v1/data/nepal')
+    response = requests.get('http://brp.com.np/covid/nepal.php')
     json_object = response.json()
-    response1=requests.get('https://data.nepalcorona.info/api/v1/covid')
-    json_object_1=response1.json()
-    confirmed_cases = int(json_object['tested_positive'])
+    confirmed_cases = int(json_object['latest_stat_by_country'][0]['total_cases'])
     # deaths = int(json_object['latest_stat_by_country'][0]['total_deaths'])
-    recovered = int(json_object['recovered'])
-    active =confirmed_cases-recovered
+    recovered = int(json_object['latest_stat_by_country'][0]['total_recovered'])
+    active =int(json_object['latest_stat_by_country'][0]['active_cases'])
     todays_date = date.today()
     days_to_go = str((lockdown_end_date+timedelta(1)) - todays_date).split(',')[0]
-    update_time=str(json_object_1[-2]['createdOn']).split('+')[0]
-    update_time=dttime.strptime(update_time,'%Y-%m-%dT%H:%M:%S.%f')
-    # update_time = update_time.replace(tzinfo=pytz.timezone('Asia/Kathmandu'))
-    update_time=pytz.timezone('Asia/Kathmandu').localize(update_time)
-    current_time =(dttime.now(ktm))
+    update_time=str(json_object['latest_stat_by_country'][0]['record_date'])
+    update_time=dttime.strptime(update_time,'%Y-%m-%d %H:%M:%S.%f')
+    update_time = update_time.replace(tzinfo=pytz.UTC)
+    current_time =(dttime.now(UTC))
     tdelta=current_time-update_time
     if(tdelta.days==0):
         time1_hour=str(tdelta).split(':')[0]
@@ -80,29 +78,10 @@ def retrieve():
         time1_day=str(tdelta).split(',')[0]
         time=time1_day
 
-
-@app.after_request
-def set_response_headers(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    return response
-
-retrieve()
-@app.route('/')
-def cases():
     return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered, time=time,
                            lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
 
-
-
 @app.route('/contact')
 def contact():
-    return render_template("contact.html", update_counter = update_counter)
+    return render_template("contact.html")
 
-
-if __name__=='__main__':
-    scheduler.add_job(id = 'Scheduled task', func = retrieve, trigger = 'interval', seconds = 600)
-    scheduler.start()
-    app.run(debug=False)
-    
