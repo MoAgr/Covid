@@ -4,21 +4,23 @@ from datetime import date,timedelta
 from datetime import datetime as dttime
 import pytz
 from pytz import timezone
-from flask_apscheduler import APScheduler
 
-scheduler = APScheduler()
 application = app = Flask(__name__)
 lockdown_end_date = date(2020, 5, 7)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
 ktm=timezone('Asia/Kathmandu')
 
+@app.after_request
+def set_response_headers(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
-confirmed_cases = active = recovered = time = days_to_go = news_list = None
-update_counter = 100
-def retrieve():
-    global confirmed_cases, active, recovered, time, days_to_go, news_list, update_counter
-    update_counter += 1
+
+@app.route('/')
+def cases():
     news_list = []
     t = tuple()
     news = requests.get(
@@ -80,29 +82,12 @@ def retrieve():
         time1_day=str(tdelta).split(',')[0]
         time=time1_day
 
-
-@app.after_request
-def set_response_headers(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    return response
-
-retrieve()
-@app.route('/')
-def cases():
     return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered, time=time,
                            lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
 
-
-
 @app.route('/contact')
 def contact():
-    return render_template("contact.html", update_counter = update_counter)
-
+    return render_template("contact.html")
 
 if __name__=='__main__':
-    scheduler.add_job(id = 'Scheduled task', func = retrieve, trigger = 'interval', seconds = 600)
-    scheduler.start()
-    app.run(debug=False)
-    
+    app.run(debug=True)
