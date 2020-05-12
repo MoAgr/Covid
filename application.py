@@ -60,29 +60,29 @@ def cases():
     active =confirmed_cases-recovered
     todays_date = date.today()
     days_to_go = str((lockdown_end_date+timedelta(1)) - todays_date).split(',')[0]
-    update_time=str(json_object_1[-2]['createdOn']).split('+')[0]
-    update_time=dttime.strptime(update_time,'%Y-%m-%dT%H:%M:%S.%f')
-    # update_time = update_time.replace(tzinfo=pytz.timezone('Asia/Kathmandu'))
-    update_time=pytz.timezone('Asia/Kathmandu').localize(update_time)
-    current_time =(dttime.now(ktm))
-    tdelta=current_time-update_time
-    if(tdelta.days==0):
-        time1_hour=str(tdelta).split(':')[0]
-        if(int(time1_hour)==0):
-            time1_minute=str(tdelta).split(':')[1]
-            if(int(time1_minute)==1):
-                time=time1_minute+ ' minute'
-            else:
-                time=time1_minute+' minutes'
-        elif(int(time1_hour)==1):
-            time=time1_hour+ ' hour'
-        else:
-            time=time1_hour+' hours'
-    else:
-        time1_day=str(tdelta).split(',')[0]
-        time=time1_day
+    # update_time=str(json_object_1[-2]['createdOn']).split('+')[0]
+    # update_time=dttime.strptime(update_time,'%Y-%m-%dT%H:%M:%S.%f')
+    # # update_time = update_time.replace(tzinfo=pytz.timezone('Asia/Kathmandu'))
+    # update_time=pytz.timezone('Asia/Kathmandu').localize(update_time)
+    # current_time =(dttime.now(ktm))
+    # tdelta=current_time-update_time
+    # if(tdelta.days==0):
+    #     time1_hour=str(tdelta).split(':')[0]
+    #     if(int(time1_hour)==0):
+    #         time1_minute=str(tdelta).split(':')[1]
+    #         if(int(time1_minute)==1):
+    #             time=time1_minute+ ' minute'
+    #         else:
+    #             time=time1_minute+' minutes'
+    #     elif(int(time1_hour)==1):
+    #         time=time1_hour+ ' hour'
+    #     else:
+    #         time=time1_hour+' hours'
+    # else:
+    #     time1_day=str(tdelta).split(',')[0]
+    #     time=time1_day
 
-    return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered, time=time,
+    return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered,
                            lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
 
 @app.route('/contact')
