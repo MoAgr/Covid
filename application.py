@@ -6,7 +6,7 @@ import pytz
 from pytz import timezone
 
 application = app = Flask(__name__)
-lockdown_end_date = date(2020, 5, 18)
+lockdown_end_date = date(2020, 6, 02)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
 ktm=timezone('Asia/Kathmandu')
@@ -55,7 +55,7 @@ def cases():
     response1=requests.get('https://data.nepalcorona.info/api/v1/covid')
     json_object_1=response1.json()
     confirmed_cases = int(json_object['tested_positive'])
-    # deaths = int(json_object['latest_stat_by_country'][0]['total_deaths'])
+    deaths = int(json_object['deaths'])
     recovered = int(json_object['recovered'])
     active =confirmed_cases-recovered
     todays_date = date.today()
@@ -83,10 +83,8 @@ def cases():
     #     time=time1_day
 
     return render_template("main.html", total=confirmed_cases, active=active, recovered=recovered,
-                           lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list)
+                           lockdown_end_date=date_to_show, days_to_go=days_to_go, news_list=news_list, deaths = deaths)
 
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
-
-
