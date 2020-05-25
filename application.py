@@ -6,7 +6,7 @@ import pytz
 from pytz import timezone
 
 application = app = Flask(__name__)
-lockdown_end_date = date(2020, 6, 02)
+lockdown_end_date = date(2020, 6, 2)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
 ktm=timezone('Asia/Kathmandu')
@@ -57,8 +57,15 @@ def cases():
     confirmed_cases = int(json_object['tested_positive'])
     deaths = int(json_object['deaths'])
     recovered = int(json_object['recovered'])
-    active =confirmed_cases-recovered
+    active =confirmed_cases-recovered-deaths
     todays_date = date.today()
+
+    # NEW CASES COUNT:
+    # list_of_cases = [630, 675]
+    # if active != list_of_cases[-1]:
+    #     list_of_cases.append(active)
+    # new_cases = list_of_cases[-1] - list_of_cases[-2]
+
     days_to_go = str((lockdown_end_date+timedelta(1)) - todays_date).split(',')[0]
     # update_time=str(json_object_1[-2]['createdOn']).split('+')[0]
     # update_time=dttime.strptime(update_time,'%Y-%m-%dT%H:%M:%S.%f')
