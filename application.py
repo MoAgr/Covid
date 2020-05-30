@@ -6,7 +6,7 @@ import pytz
 from pytz import timezone
 
 application = app = Flask(__name__)
-lockdown_end_date = date(2020, 7, 14)
+lockdown_end_date = date(2020, 6, 14)
 date_to_show = lockdown_end_date.strftime("%b %d")
 UTC=timezone('UTC')
 ktm=timezone('Asia/Kathmandu')
